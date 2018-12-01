@@ -1,0 +1,50 @@
+// AdventOfCode2018-01
+var freqChanges = [];
+
+function parseInput(inputFile) {
+    // for each line in text file parse the symbol (first character) and the number into an array of objects 
+    var fs = require('fs'),
+    readline = require('readline'),
+    instream = fs.createReadStream(inputFile),
+    outstream = new (require('stream'))(),
+    rl = readline.createInterface(instream, outstream);
+     
+    rl.on('line', function (line) {
+        var object = {
+            operation: line.substr(0,1),
+            value: parseInt(line.substr(1))
+          }
+        freqChanges.push(object);
+    });
+    
+    rl.on('close', function (line) {
+        //console.log(line);
+        //console.log('done reading file.');
+    });
+}
+
+parseInput('./input1.txt');
+
+// Starting from zero, loop through all the entries in the array and apply the operations
+var frequency = 0; 
+console.log('length=' + freqChanges.length);
+freqChanges.forEach( function (object) {
+    console.log('Object contains ' + object.toString());
+    if (object.operation == '+') {
+        frequency += object.value;
+    }
+    else {
+        frequency -= object.value;
+    }
+});
+// for (i in freqChanges) { //(var i = 0; i < freqChanges.length; i++) {
+//     console.log(freqChanges[i].toString());
+//     if (freqChanges[i].operation = '+') {
+//         frequency += freqChanges[i].value;
+//     }
+//     else {
+//         frequency -= freqChanges[i].value;
+//     }
+// }
+
+console.log('The resulting frequency is ' + frequency);

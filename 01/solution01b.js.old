@@ -1,0 +1,29 @@
+// AdventOfCode2018-01
+
+var frequency = 0; 
+
+// for each line in text file parse the symbol (first character) and the number into an array of objects 
+var fs = require('fs'),
+readline = require('readline'),
+instream = fs.createReadStream('./input1.txt'),
+outstream = new (require('stream'))(),
+rl = readline.createInterface(instream, outstream);
+    
+rl.on('line', function (line) {
+    console.log(line.substr(0,1));
+    if (line.substr(0,1) = '+') {
+        console.log(parseInt(line.substr(1)));
+        frequency += parseInt(line.substr(1));
+    }
+    else {
+        console.log(parseInt(line.substr(1)));
+        frequency -= parseInt(line.substr(1));
+    }
+});
+
+rl.on('close', function (line) {
+    //console.log(line);
+    //console.log('done reading file.');
+});
+
+console.log('The resulting frequency is ' + frequency);
